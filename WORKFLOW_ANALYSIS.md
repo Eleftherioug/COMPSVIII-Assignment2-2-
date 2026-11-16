@@ -4,9 +4,9 @@
    The workflow runs when code is pushed to `main` and when a pull request targets `main`.
 
 2. **What are the four main steps this workflow performs?**  
-   The `build-and-test` job checks out the repository, validates HTML, checks links, and uploads the site as a Pages artifact. The separate `deploy` job then deploys that artifact to GitHub Pages when the build job succeeds and the event is a push to `main`.
+   The `build-and-test` job checks out the repository, validates HTML, checks links, and uploads the site as a Pages artifact. The link-check step has `continue-on-error: true`, so a link-check failure is reported but does not stop the job. The separate `deploy` job then deploys the artifact to GitHub Pages when the build job succeeds and the event is a push to `main`.
 
-3. **What does the “Checkout code” step do and why is it necessary?**  
+3. **What does the "Checkout code" step do and why is it necessary?**  
    `actions/checkout@v4` checks out the repository contents into the runner's workspace. The later validation, link-check, and artifact steps need those files to run.
 
 4. **What is the purpose of the environment configuration?**  
